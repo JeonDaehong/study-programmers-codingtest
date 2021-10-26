@@ -1,5 +1,11 @@
 package problem_solving_java.level01;
 
+import java.util.Scanner;
+
+// 풀이시간  : 2021-10-26 16:50 ~ 18:04
+// 결과		 : 76.9 / 100.0 (정확성: 76.9)
+// 나의 판단 : 꼭 다시 풀어보기
+
 /*
  * <문제 제목> : 신규 아이디 추천
  
@@ -122,6 +128,140 @@ package problem_solving_java.level01;
 		7단계 변화 없습니다.
 */
 
+
+class Problem_002_MySolution001 {
+	public String solution(String new_id) {
+		
+		int length = new_id.length();	// 글자수
+		String tempAnswer = "";			// 중간 테스트 String
+		String tempAnswer2 = "";		// 중간 테스트 String 2
+		
+		// 1단계 (대문자 → 소문자)
+		for (int i=0; i<length; i++) {
+			if (Character.isUpperCase(new_id.charAt(i))) {
+				int temp = (int)new_id.charAt(i) + 32;
+				tempAnswer += (char)temp;
+			} else {
+				tempAnswer += new_id.charAt(i);
+			}
+		}
+		System.out.println("1차테스트 : " + tempAnswer);
+		
+		// 2단계 (소문자, 숫자, -, _, .를 제외한 문자 제거)
+		char[] temp = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-' , '_' , '.'};
+		for (int i=0; i<length; i++) {
+			if (Character.isLowerCase(tempAnswer.charAt(i))) {
+				tempAnswer2 += tempAnswer.charAt(i);
+			} else {
+				for (int j=0; j<temp.length; j++) {
+					if (temp[j] == tempAnswer.charAt(i)) {
+						tempAnswer2 += tempAnswer.charAt(i);
+						break;
+					}
+				}
+			}
+		}
+		System.out.println("2차테스트 : " + tempAnswer2);
+		
+		// 3단계 (마침표(.)가 연속으로 2번 찍힌 경우, 1개로 바꿔주기)
+		tempAnswer = "";
+		for (int i=0; i<tempAnswer2.length()-1; i++) {
+			if (tempAnswer2.charAt(i) != tempAnswer2.charAt(i+1)) {
+				tempAnswer += tempAnswer2.charAt(i);
+			}
+			if (i == tempAnswer2.length()-2) {
+				tempAnswer += tempAnswer2.charAt(i+1);
+			}
+		}
+		System.out.println("3차테스트 : " + tempAnswer);
+		
+		
+		// 4단계 (마침표(.)가 처음이나 마지막에 있을시 제거)
+		tempAnswer2 = "";
+		for (int i=0; i<tempAnswer.length(); i++) {
+			if (i==0) {
+				if (tempAnswer.charAt(0) != '.') {
+					tempAnswer2 += tempAnswer.charAt(i);
+				} 
+			} else if (i==tempAnswer.length()-1) {
+				if (tempAnswer.charAt(tempAnswer.length()-1) != '.') {
+					tempAnswer2 += tempAnswer.charAt(i);
+				} 
+			} else {
+				tempAnswer2 += tempAnswer.charAt(i);
+			}
+		}
+		System.out.println("4차테스트 : " + tempAnswer2);
+		
+		// 5단계 (빈문자열이 되면, a를 넣어주기)
+		tempAnswer = "";
+		if (tempAnswer2 == "") {
+			tempAnswer2 = "a";
+		}
+		tempAnswer = tempAnswer2;
+		System.out.println("5차테스트 : " + tempAnswer);
+		
+		
+		
+		// 6단계 (ID 길이는 15자까지만)
+		tempAnswer2 = "";
+		if (tempAnswer.length() > 15) {
+			for (int i=0; i<15; i++) {
+				tempAnswer2 += tempAnswer.charAt(i);
+			}
+		} else {
+			tempAnswer2 = tempAnswer;
+		}
+		System.out.println("6차테스트 : " + tempAnswer2);
+		
+		// 다시 양 끝에 .가 있는지 확인
+		tempAnswer = tempAnswer2;
+		tempAnswer2 = "";
+		for (int i=0; i<tempAnswer.length(); i++) {
+			if (i==0) {
+				if (tempAnswer.charAt(0) != '.') {
+					tempAnswer2 += tempAnswer.charAt(i);
+				} 
+			} else if (i==tempAnswer.length()-1) {
+				if (tempAnswer.charAt(tempAnswer.length()-1) != '.') {
+					tempAnswer2 += tempAnswer.charAt(i);
+				} 
+			} else {
+				tempAnswer2 += tempAnswer.charAt(i);
+			}
+		}
+		
+		
+		
+		// 7단계 (2자 이하일 시, 마지막 문자를 추가)
+		tempAnswer = "";
+		while (true) {
+			if (tempAnswer2.length() < 3) {
+				tempAnswer2 += tempAnswer2.charAt(tempAnswer2.length()-1);
+			} else {
+				break;
+			}	
+		}
+		tempAnswer = tempAnswer2;
+		System.out.println("7차테스트 : " + tempAnswer);
+		
+		// 답
+        String answer = tempAnswer;
+        return answer;
+    }
+}
+
+
+
+// 테스트용 메인 함수
 public class Problem_002_MySolution01 {
 
+	public static void main(String[] args) {
+		
+		Problem_002_MySolution001 test = new Problem_002_MySolution001();
+		Scanner sc = new Scanner(System.in);
+		
+		test.solution(sc.next());
+		
+	}
 }

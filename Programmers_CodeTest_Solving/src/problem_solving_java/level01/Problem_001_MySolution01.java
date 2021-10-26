@@ -1,5 +1,9 @@
 package problem_solving_java.level01;
 
+// 풀이시간  : 2021-10-25  22:42 ~ 22:47
+// 결과		 : 100.0 / 100.0 (정확성: 100.0)
+// 나의 판단 : 더 나은 답안이 존재하니, 공부해서 다시 풀어볼 것 !
+
 /*
  * <문제 제목> : 로또의 최고 순위와 최저 순위
  
@@ -83,7 +87,6 @@ package problem_solving_java.level01;
 		민우가 구매한 로또의 번호와 당첨 번호가 모두 일치하므로, 최고 순위와 최저 순위는 모두 1등입니다.
 */
 
- // 풀이 시간 : 2021-10-25  22:42 ~ 22:47
 public class Problem_001_MySolution01 {
 	public int[] solution(int[] lottos, int[] win_nums) {
 		

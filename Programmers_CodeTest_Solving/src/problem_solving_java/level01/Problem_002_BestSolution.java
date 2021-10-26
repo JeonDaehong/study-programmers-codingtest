@@ -122,6 +122,106 @@ package problem_solving_java.level01;
 		7단계 변화 없습니다.
 */
 
-public class Problem_002_BestSolution {
+class Problem_002_BestSolution {
 
+	 public String solution(String new_id) {
+	        String answer = new_id.toLowerCase();
+	        
+	        answer = answer.replaceAll("[^0-9a-z-_.]", "");
+	        answer = answer.replaceAll("[.]{2,}", ".");
+	        answer = answer.replaceAll("^[.]{1}", "");
+	        
+	        if(answer.equals(""))  answer += "a";
+	 
+	        
+	        if(answer.length() >= 16) answer = answer.substring(0, 15);
+	        
+	        answer = answer.replaceAll("[.]{1}$", "");
+	       
+	        
+	        if(answer.length() <= 2) {
+	            for(int i = answer.length(); i < 3; i++){
+	                answer += answer.substring(answer.length()-1);
+	            }
+	        }
+
+	        return answer;
+	 }
+	
+}
+
+
+
+
+class Problem_002_BestSolution2 {
+	
+	public String solution(String new_id) {
+
+        String s = new KAKAOID(new_id)
+                .replaceToLowerCase()
+                .filter()
+                .toSingleDot()
+                .noStartEndDot()
+                .noBlank()
+                .noGreaterThan16()
+                .noLessThan2()
+                .getResult();
+
+
+        return s;
+    }
+
+    private static class KAKAOID {
+        private String s;
+
+        KAKAOID(String s) {
+            this.s = s;
+        }
+
+        private KAKAOID replaceToLowerCase() {
+            s = s.toLowerCase();
+            return this;
+        }
+
+        private KAKAOID filter() {
+            s = s.replaceAll("[^a-z0-9._-]", "");
+            return this;
+        }
+
+        private KAKAOID toSingleDot() {
+            s = s.replaceAll("[.]{2,}", ".");
+            return this;
+        }
+
+        private KAKAOID noStartEndDot() {
+            s = s.replaceAll("^[.]|[.]$", "");
+            return this;
+        }
+
+        private KAKAOID noBlank() {
+            s = s.isEmpty() ? "a" : s;
+            return this;
+        }
+
+        private KAKAOID noGreaterThan16() {
+            if (s.length() >= 16) {
+                s = s.substring(0, 15);
+            }
+            s = s.replaceAll("[.]$", "");
+            return this;
+        }
+
+        private KAKAOID noLessThan2() {
+            StringBuilder sBuilder = new StringBuilder(s);
+            while (sBuilder.length() <= 2) {
+                sBuilder.append(sBuilder.charAt(sBuilder.length() - 1));
+            }
+            s = sBuilder.toString();
+            return this;
+        }
+
+        private String getResult() {
+            return s;
+        }
+    }
 }
