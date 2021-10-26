@@ -125,18 +125,20 @@ package problem_solving_java.level01;
 class Problem_002_BestSolution {
 
 	 public String solution(String new_id) {
-	        String answer = new_id.toLowerCase();
+	        String answer = new_id.toLowerCase();				// 1단계
 	        
-	        answer = answer.replaceAll("[^0-9a-z-_.]", "");
-	        answer = answer.replaceAll("[.]{2,}", ".");
-	        answer = answer.replaceAll("^[.]{1}", "");
+	        // replaceAll("A", "B")  :  A를 B로 치환한다.
 	        
-	        if(answer.equals(""))  answer += "a";
+	        answer = answer.replaceAll("[^0-9a-z-_.]", "");		// 2단계 ( [ ] 안에 ^가 있으면, not으로 반대의 의미)
+	        answer = answer.replaceAll("[.]{2,}", ".");			// 3단계
+	        answer = answer.replaceAll("^[.]{1}", "");			// 4단계 (마침표(.)로 시작하는 부분만 우선 지움)
+	        
+	        if(answer.equals(""))  answer += "a";				// 5단계
 	 
 	        
-	        if(answer.length() >= 16) answer = answer.substring(0, 15);
+	        if(answer.length() >= 16) answer = answer.substring(0, 15);		// 6단계
 	        
-	        answer = answer.replaceAll("[.]{1}$", "");
+	        answer = answer.replaceAll("[.]{1}$", "");						// (마침표(.)로 끝나는 부분을 지워줌)
 	       
 	        
 	        if(answer.length() <= 2) {
