@@ -1,10 +1,17 @@
 package problem_solving_java.level01;
 
-import java.util.Stack;
+import java.util.ArrayList;
 
-//풀이시간  : 2021-10-29 10:50 ~ 
+//풀이시간  : 2021-10-29 16:00 ~ 16:36
 //결과	 	: 100.0 / 100.0 (정확성: 100.0)
-//나의 판단 : 
+/*나의 판단 : 풀어놓고 어떻게 풀었는지 넋이 나가있는 부분이 있기에, 공부해서 꼭 다시 풀어봅시다.
+              특히, ArrayList의 remove는 없어질때마다 바로 당겨지니, k, k+1 인덱스를 제거하는 것이 아니라
+              k 인덱스를 삭제하고, 당겨진 새로운 k인덱스를 삭제하는 느낌으로 k, k 인덱스를 제거하는 것이다.
+              꼭 기억!
+              그리고, 같은 인형이 2개가 되는 순간 없애려면, 아래 내 코드대로 하는게 맞지만
+              문제에서는 그런 말이 없기에
+              그냥 다 쌓아두고, 곂치는 걸 없애는 느낌으로 진행해도 됨.
+*/
 
 /*
  * <문제 제목> : 크레인 인형뽑기 게임
@@ -60,16 +67,33 @@ import java.util.Stack;
 	
 */
 
-
 class Problem_005_MySolution01 {
 
 	public int solution(int[][] board, int[] moves) {
 		
+		ArrayList<Integer> basketList = new ArrayList<>();
+		
 		int answer = 0;
-		Stack<Integer> stack = new Stack<>();
 	
-        
+		for (int i=0; i<moves.length; i++) {
+			for (int j=0; j<board.length; j++) {
+				if (board[j][moves[i]-1] != 0) {
+					basketList.add(board[j][moves[i]-1]);
+					board[j][moves[i]-1] = 0;
+					if (basketList.size() > 1) {
+						for (int k=0; k<basketList.size()-1; k++)
+						if (basketList.get(k) == basketList.get(k+1)) {
+							basketList.remove(k);
+							basketList.remove(k);
+							answer += 2;
+							k--;	// 2개를 지웠기 때문에, k--를 해준다.
+						}
+					}
+					break;
+				}
+			}
+		}		
         return answer;
     }
-
 }
+
