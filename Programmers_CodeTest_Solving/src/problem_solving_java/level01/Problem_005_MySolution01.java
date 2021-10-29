@@ -1,6 +1,8 @@
 package problem_solving_java.level01;
 
-//풀이시간  : 2021-10-28 18:
+import java.util.Stack;
+
+//풀이시간  : 2021-10-29 10:50 ~ 
 //결과	 	: 100.0 / 100.0 (정확성: 100.0)
 //나의 판단 : 
 
@@ -62,9 +64,10 @@ package problem_solving_java.level01;
 class Problem_005_MySolution01 {
 
 	public int solution(int[][] board, int[] moves) {
-        String basket = "";
+		
 		int answer = 0;
-        
+		Stack<Integer> stack = new Stack<>();
+	
         
         return answer;
     }
