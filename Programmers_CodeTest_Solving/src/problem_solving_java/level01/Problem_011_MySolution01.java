@@ -53,15 +53,12 @@ class Problem_011_MySolution01 {
         int[] answer = {};
         	answer = new int[commands.length];
 	        for (int i=0; i<commands.length; i++) {
-	        	ArrayList<Integer> tempList = new ArrayList<>();
+	        	int[] temp = new int[commands[i][1]-commands[i][0]-1];
 	        	for (int j=0; j<1; j++) {
 	        		int k = commands[i][j];
 	        		while (k <= commands[i][j+1]) {
-	        			tempList.add(array[k+1]);
 	        			k++;
 	        		}
-	        		
-	        		answer[i] = tempList.get(commands[i][j+2]+1);
 	        	}
         }
         return answer;
