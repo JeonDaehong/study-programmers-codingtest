@@ -3,7 +3,7 @@ package problem_solving_java.level01;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-//풀이시간    : 2021-11-08 12:30 ~ 13:30 + 
+//풀이시간    : 2021-11-08 12:30 ~ 13:30 
 //결과	  	  : 100.0 / 100.0 (정확성: 100.0)
 //나의 판단   : 풀긴 풀었는데, 잔 실수가 너무 많았음. 다시 풀 것.
 
@@ -76,14 +76,14 @@ class Problem_012_MySolution01 {
 		int[] arr =  Arrays.copyOfRange(score,0,3);
 		Arrays.sort(arr);
 		
-		// ?
+		
 		for (int i=0; i<arr.length; i++) {
 			if (score[i] == arr[2]) {
 				list.add(i+1);
 			}
 		}
 		
-		// ?
+		
 		answer = new int[list.size()];
 		for (int i=0; i< list.size(); i++) {
 			answer[i] = list.get(i);
