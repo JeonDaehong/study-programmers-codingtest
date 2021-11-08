@@ -1,10 +1,10 @@
 package problem_solving_java.level01;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
-//풀이시간    : 2021-10-29 18:15 ~ 18:55
+//풀이시간    : 2021-11-08 10:30 ~ 11:05
 //결과	  	  : 100.0 / 100.0 (정확성: 100.0)
-//나의 판단   : 풀긴 풀었는데, sort 말고 HashMap을 이용해서 다시 꼭 풀어보자.
+//나의 판단   : 풀긴 풀었는데, 잔 실수가 너무 많았음. 다시 풀 것.
 
 /*
 * <문제 제목> : K번째 수
@@ -51,15 +51,24 @@ class Problem_011_MySolution01 {
 
 	public int[] solution(int[] array, int[][] commands) {
         int[] answer = {};
-        	answer = new int[commands.length];
-	        for (int i=0; i<commands.length; i++) {
-	        	int[] temp = new int[commands[i][1]-commands[i][0]-1];
-	        	for (int j=0; j<1; j++) {
-	        		int k = commands[i][j];
-	        		while (k <= commands[i][j+1]) {
-	        			k++;
-	        		}
+        answer = new int[commands.length];
+        int cnt = 0;
+        for (int i=0; i<commands.length; i++) {
+        	int[] temp = new int[(commands[i][1]) - (commands[i][0]) + 1];
+        	int k = 0;
+        	// temp의 길이가 1일 경우의 예외처리
+        	if (commands[i][0] == commands[i][1]) {
+        		temp[k] = array[commands[i][0]-1];
+        	// 일반적일 경우 (commands[i][0] 부터 commands[i][1]까지니까, j<=commnads[j][1]을 해줘야됨.
+        	} else {
+	        	for (int j=commands[i][0]; j<=commands[i][1]; j++) {
+	        		temp[k] = array[j-1];
+	        		k++;
 	        	}
+        	}
+        	Arrays.sort(temp);
+        	answer[cnt] = temp[(commands[i][2]) - 1];
+        	cnt++;
         }
         return answer;
     }
