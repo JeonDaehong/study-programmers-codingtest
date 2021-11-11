@@ -1,7 +1,11 @@
 package problem_solving_java.level01;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 //풀이시간    : 2021-11-11 09:45 ~ 10:20 + 
 //결과	  	  : 100.0 / 100.0 (정확성: 100.0)
@@ -85,59 +89,29 @@ public class Problem_015_MySolution01 {
 
 	public int[] solution(int N, int[] stages) {
 		
-		List<Double> failList = new ArrayList<>();
+		Map<Integer , Double> stageFailureRateList = new HashMap<>();
 		
-        int[] answer = {};
-        
-        int nowStage = 1;
-        int reachInStage = 0;
-        int stageClear = 0;
-        double failureRate = 0;
-        
-        // 스테이지별 실패율 저장
-        while (nowStage <= N) {
-        	
-        	for (int i : stages) {
-        		if (i >= nowStage) reachInStage++;
-        		if (i > nowStage) stageClear++;
-        	}
-        	
-        	failureRate = (reachInStage - stageClear) / reachInStage;
-        	
-        	failList.add(failureRate);
-        	
-        	stageClear = 0;
-        	reachInStage = 0;
-        	nowStage++;
-        }
-        
-        // 스테이지 저장 배열
-        answer = new int[N];
-        
-        for (int i=0; i<answer.length; i++) {
-        	answer[i] = i+1;
-        }
-        
-        // 내림차순 정렬
-        double max = 0;
-        
-        for (int i=0; i<failList.size(); i++) {
-        	max = 0;
-	        for (int j=i; j<failList.size(); j++) {
-	        	if (failList.get(j) > max) {
-	        		double temp = 0;
-	        		int temp2 = 0;
-	        		max = failList.get(j);
-	        		temp = failList.get(i);
-	        		failList.set(i, failList.get(j));
-	        		failList.set(j, temp);
-	        		temp2 = answer[i];
-	        		answer[i] = answer[j];
-	        		answer[j] = temp2;
-	        	}
-	        }
-        }
-        
+		int[] answer = new int [N];
+		
+		int nowStage = 1;
+		int stageAllPlayer = 0;
+		int stagePassPlayer = 0;
+		double fail = 0;
+		
+		while(nowStage <= N) {
+			for (int i=0; i<stages.length; i++) {
+				if (stages[i] >= nowStage) stageAllPlayer++;
+				if (stages[i] > nowStage) stagePassPlayer++;
+			}
+			fail = (stageAllPlayer-stagePassPlayer) / stageAllPlayer;
+			
+			stageFailureRateList.put(nowStage, fail);
+			
+			stageAllPlayer = 0;
+			stagePassPlayer = 0;
+			nowStage++;
+		}
+
         return answer;
         
     }
