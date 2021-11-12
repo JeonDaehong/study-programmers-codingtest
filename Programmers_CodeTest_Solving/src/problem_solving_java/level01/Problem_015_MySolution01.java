@@ -1,15 +1,20 @@
 package problem_solving_java.level01;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-//풀이시간    : 2021-11-11 09:45 ~ 10:20 + 
+//풀이시간    : 2021-11-11 09:45 ~ 10:20 + 2021-11-12 21:30 ~ 22:52
 //결과	  	  : 100.0 / 100.0 (정확성: 100.0)
-//나의 판단   : 
+//나의 판단   : 1. int값으로 double을 구할 땐 (double) 넣기
+//				   즉, 내가 원하는 자료형으로 뽑아내고 싶을 땐, 그 계산식때부터 캐스팅을 해줘야됨.
+//				2. 나눗셈을 할 때 분자든, 분모든 0이 있어서는 안된다. (컴퓨터는 인피니티로 처리해버림)
+//				3. 나눗셈에서 -가 나올 수도 있으니 그 부분을 고려해야 한다.
+//				[잘은 풀었지만, 계속 공부해서 꼭 다시 풀어보기! 너무 좋은 문제임!]
 
 /*
 * <문제 제목> : 실패율
@@ -85,12 +90,11 @@ class Solution {
 
 */
 
-public class Problem_015_MySolution01 {
+class Problem_015_MySolution01 {
 
-	public int[] solution(int N, int[] stages) {
+	public static int[] solution(int N, int[] stages) {
 		
 		Map<Integer , Double> stageFailureRateList = new HashMap<Integer , Double>();
-		List<Integer> stageList = new ArrayList<Integer>();
 		
 		int[] answer = new int[N];
 		
@@ -104,7 +108,12 @@ public class Problem_015_MySolution01 {
 				if (stages[i] >= nowStage) stageAllPlayer++;
 				if (stages[i] > nowStage) stagePassPlayer++;
 			}
-			fail = (stageAllPlayer-stagePassPlayer) / stageAllPlayer;
+			
+			if (stageAllPlayer != 0 && stageAllPlayer-stagePassPlayer != 0) {
+				fail = (double)(stageAllPlayer-stagePassPlayer) / (double)stageAllPlayer;
+			} else {
+				fail = 0;
+			}
 			
 			stageFailureRateList.put(nowStage, fail);
 			
@@ -113,10 +122,34 @@ public class Problem_015_MySolution01 {
 			nowStage++;
 		}
 		
-		
+		double max = -1;
+		int idx = 0;
+		for (int k=0; k<N; k++) {
+			max = -1;
+			idx = 0;
+			for (int i : stageFailureRateList.keySet()) {
+				if (stageFailureRateList.get(i) > max) {
+					max = stageFailureRateList.get(i);
+					idx = i;
+				}
+			}
+			answer[k] = idx;
+			stageFailureRateList.remove(idx);
+		}
 
         return answer;
         
     }
 	
+	public static void main(String[] args) {
+		
+		int[] stages = {2, 1, 2, 6, 2, 4, 3, 3};
+		
+		System.out.println(Arrays.toString(solution(5, stages)));
+		
+	}
+	
 }
+
+
+
