@@ -89,9 +89,10 @@ public class Problem_015_MySolution01 {
 
 	public int[] solution(int N, int[] stages) {
 		
-		Map<Integer , Double> stageFailureRateList = new HashMap<>();
+		Map<Integer , Double> stageFailureRateList = new HashMap<Integer , Double>();
+		List<Integer> stageList = new ArrayList<Integer>();
 		
-		int[] answer = new int [N];
+		int[] answer = new int[N];
 		
 		int nowStage = 1;
 		int stageAllPlayer = 0;
@@ -111,6 +112,8 @@ public class Problem_015_MySolution01 {
 			stagePassPlayer = 0;
 			nowStage++;
 		}
+		
+		
 
         return answer;
         
