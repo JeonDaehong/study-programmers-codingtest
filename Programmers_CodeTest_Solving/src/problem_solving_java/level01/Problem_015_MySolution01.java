@@ -141,6 +141,7 @@ class Problem_015_MySolution01 {
         
     }
 	
+	// 디버깅
 	public static void main(String[] args) {
 		
 		int[] stages = {2, 1, 2, 6, 2, 4, 3, 3};
