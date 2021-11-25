@@ -1,8 +1,11 @@
 package problem_solving_java.level01;
 
-// 풀이시간    : 2021-11-25 10:25 ~ 10:
+// 풀이시간    : 2021-11-25 18:35 ~ 18:47
 // 결과	  	   : 100.0 / 100.0 (정확성: 100.0)
-// 나의 판단   : 
+// 나의 판단   : 이건 꼭 다시 풀어봐야되는 문제이다.
+//				 어떻게 풀어야되는지 감이 안와서, 공부를 먼저하였고
+//				 toBinaryString과 format 그리고 비트연산자(|)라는 걸 알게되었다.
+//				 꼭 다시 풀어보자!
 
 /*
 * <문제 제목> : 비밀지도
@@ -65,14 +68,12 @@ public class Problem_024_MySolution01 {
 	public String[] solution(int n, int[] arr1, int[] arr2) {
 		
         String[] answer = {};
-        String[] temp1 = new String[n];
-        String[] temp2 = new String[n];
-        String[][] twoDimTemp1 = new String[n][5];
-        String[][] twoDimTemp2 = new String[n][5];
+        answer = new String[arr1.length];
         
         for (int i=0; i<n; i++) {
-        	temp1[i] = Integer.toString(arr1[i], 2);
-        	temp2[i] = Integer.toString(arr2[i], 2);
+        	String temp = String.format("%"+n+"s", Integer.toBinaryString(arr1[i]|arr2[i]))
+        				.replaceAll("1", "#").replaceAll("0", " ");
+        	answer[i] = temp;
         }
         
         return answer;
