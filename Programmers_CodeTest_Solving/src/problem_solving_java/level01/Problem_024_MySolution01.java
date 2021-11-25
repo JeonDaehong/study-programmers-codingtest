@@ -65,8 +65,14 @@ public class Problem_024_MySolution01 {
 	public String[] solution(int n, int[] arr1, int[] arr2) {
 		
         String[] answer = {};
+        String[] temp1 = new String[n];
+        String[] temp2 = new String[n];
+        String[][] twoDimTemp1 = new String[n][5];
+        String[][] twoDimTemp2 = new String[n][5];
         
         for (int i=0; i<n; i++) {
+        	temp1[i] = Integer.toString(arr1[i], 2);
+        	temp2[i] = Integer.toString(arr2[i], 2);
         }
         
         return answer;
