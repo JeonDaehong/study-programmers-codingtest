@@ -22,16 +22,19 @@ public class Problem_004_MySolution02 {
     // 초기 위치
     int[] myLeftUmji = {3, 0};
     int[] myRightUmji = {3, 2};
+    
+    // 손잡이
     String myHand = "";
 	
+    // 메인
 	public String solution(int[] numbers, String hand) {
 		
 		myHand = (hand.equals("right")) ? "R" : "L";
 		
 	        String answer = "";
        
+	        // 반복문
 	        for (int i : numbers) {
-	        	
 	        	String temp = pushNum(i);
         	
 	        	if (temp.equals("L")) {
@@ -42,12 +45,11 @@ public class Problem_004_MySolution02 {
 	        	
 	        	answer += temp;
 	        }
-	        
 	        return answer;
 	    }
 	
 	
-	
+	// 어떤 번호인가
 	String pushNum (int num) {
 		
 		if (num == 1 || num == 4 || num == 7) {
@@ -57,7 +59,7 @@ public class Problem_004_MySolution02 {
 			return "R";	
 		}
 		
-		
+		// 2,5,8,0 일 경우
 		if ((distance(myLeftUmji , num) < distance(myRightUmji , num))) {
 			return "L";	
 		}
@@ -65,14 +67,16 @@ public class Problem_004_MySolution02 {
 			return "R";	
 		}
 		
+		// 거리가 같을 경우 (무슨 손잡이인가)
 		return this.myHand;
 		
 	}
 	
 	
+	// 2,5,8,0 가까운 엄지 계산
 	int distance (int[] umji , int num) {
 		
-		int result = Math.abs(phoneNum[num][0] - umji[0]) + Math.abs(phoneNum[num][1] - umji[1]);
+		int result = Math.abs(phoneNum[num][0] - umji[0]) + Math.abs(phoneNum[num][1] - umji[1]); // 절대값으로 계산
 
 		return result;
 	}
